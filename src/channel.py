@@ -23,7 +23,7 @@ class Channel:
         self.video_count = int(self.channel_info["items"][0]["statistics"]["videoCount"])
         self.view_count = int(self.channel_info["items"][0]["statistics"]["viewCount"])
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.title} ({self.url})"
 
     def __add__(self, other):
@@ -43,10 +43,6 @@ class Channel:
 
     def __ge__(self, other):
         return self.subscriber_count >= other.subscriber_count
-
-
-
-
 
     def to_json(self, filename: str) -> None:
         """Метод записывает данные о классе в json файл."""
