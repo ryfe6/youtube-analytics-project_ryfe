@@ -12,10 +12,19 @@ class Video:
         video_response = (
             self.youtube.videos().list(part="snippet,statistics,contentDetails,topicDetails", id=id_video).execute()
         )
-        self.title = video_response["items"][0]["snippet"]["title"]
-        self.url = f"https://www.youtube.com/watch?v={id_video}"
-        self.view_count = video_response["items"][0]["statistics"]["viewCount"]
-        self.video_count = video_response["items"][0]["statistics"]["likeCount"]
+
+
+        try:
+            self.title = video_response["items"][0]["snippet"]["title"]
+        except:
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
+        else:
+            self.url = f"https://www.youtube.com/watch?v={id_video}"
+            self.view_count = video_response["items"][0]["statistics"]["viewCount"]
+            self.like_count = video_response["items"][0]["statistics"]["likeCount"]
 
     def __str__(self) -> str:
         return self.title
